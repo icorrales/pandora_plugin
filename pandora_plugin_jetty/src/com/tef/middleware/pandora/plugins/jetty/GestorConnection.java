@@ -16,11 +16,10 @@ public class GestorConnection {
 static private GestorConnection instancia = null;
 String host = "localhost"; // Your JBoss Bind Address default is localhost
 int port = 1099; // JBoss remoting port
-String urlString ="service:jmx:rmi://" + host + "/jndi/rmi://"+ host + ":" + port + "/jmxconnector";
 MBeanServerConnection connection = null;
 private GestorConnection()
 {
-String urlString ="service:jmx:rmi://" + host + "/jndi/rmi://"+ host + ":" + port + "/jmxconnector";
+String urlString ="service:jmx:rmi://" + host + "/jndi/rmi://"+ host + ":" + port + "/jmxrmi";
 System.out.println(" \n\n\t**** urlString: "+urlString);
 JMXServiceURL serviceURL = null;
 try {
