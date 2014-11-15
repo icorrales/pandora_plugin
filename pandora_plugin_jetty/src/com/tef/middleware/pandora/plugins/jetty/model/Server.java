@@ -148,6 +148,44 @@ public class Server {
 		this.ratioHeapUsed = ratioHeapUsed;
 	}
 	
+	public void parse()
+	{
+		writeModuleBoolean("status", "Jetty Server Status",status);
+		writeModule("cpuLoad","Jetty CPU Consumption CPU",String.valueOf(cpuLoad));
+		writeModule("Threads","Jetty Threads used",String.valueOf(threads));
+		writeModule("Max Threads","Jetty Max Threads",String.valueOf(maxThreads));
+		writeModule("Idle Threads","Jetty Idle Threads",String.valueOf(idleThreads));
+		writeModule("Ratio Heap Used","Jetty Heap Used",String.valueOf(ratioHeapUsed));
+		writeModule("Ratios Old Generation Used","Jetty Heap used by old generation",String.valueOf(ratioOldUsed));
+		writeModule("Ratios Perm Generation Heap Used","Jetty Heap used by perm generation",String.valueOf(ratioPermUsed));				
+	}
+
+	private void writeModule(String nombre, String description, String dato) {
+		System.out.println("<module>");		
+		System.out.println("<name><![CDATA[Jetty:" + nombre + " ]]></name>");		
+		System.out.println("<description><![CDATA["+ description  +"]]></description>");
+		System.out.println("<type>generic_data</type>");
+		System.out.println("<min>0</min>");
+		System.out.println("<disabled>0</disabled>");
+		System.out.println("<data><![CDATA["+ dato +"]]></data>");				
+		System.out.println("</module>");
+	}
+
+	
+	private void writeModuleBoolean(String nombre, String description, boolean dato) {
+		System.out.println("<module>");		
+		System.out.println("<name><![CDATA[Jetty:" + nombre + " ]]></name>");		
+		System.out.println("<description><![CDATA["+ description  +"]]></description>");
+		System.out.println("<type>generic_data</type>");
+		System.out.println("<min>0</min>");
+		System.out.println("<disabled>0</disabled>");
+		if (dato) 
+			{ System.out.println("<data><![CDATA[1]]></data>");}
+		else
+			{ System.out.println("<data><![CDATA[1]]></data>"); }			
+		System.out.println("</module>");
+	}
+	
 	
 	
 	
