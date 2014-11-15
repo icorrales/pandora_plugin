@@ -23,6 +23,7 @@ public class Server {
 	String javaSOObject = "java.lang:type=OperatingSystem";
 	String javaOldGenObject = "java.lang:type=MemoryPool,name=PS Old Gen";
 	String javaOldPermObject = "java.lang:type=MemoryPool,name=PS Perm Gen";
+	String javaHeapObject = "java.lang:type=Memory";
 	
 	private ObjectName threadPoolServerName;
 	private int idleThreads; 
@@ -33,7 +34,8 @@ public class Server {
 	private double cpuLoad;
 	private long ratioUsed;
 	private long ratioOldUsed;
-	private long ratioPermUsed; 
+	private long ratioPermUsed;
+	private long ratioHeapUsed; 
 	
 	public Server()
 	{
@@ -63,7 +65,12 @@ public class Server {
 		CompositeDataSupport permData = (CompositeDataSupport) con.getAttribute(oPermGen, "CollectionUsage");
 		long permMax = (Long) permData.get("max");
 		long permUsed = (Long) permData.get("used");
-		ratioPermUsed = ((permUsed * 100) / permMax);  
+		ratioPermUsed = ((permUsed * 100) / permMax);
+		ObjectName oHeap = new ObjectName(javaHeapObject);
+		CompositeDataSupport heapData = (CompositeDataSupport) con.getAttribute(oHeap, "HeapMemoryUsage");
+		long heapMax = (Long) heapData.get("max");
+		long heapUsed = (Long) heapData.get("used");
+		ratioHeapUsed = ((heapUsed * 100) / heapMax);
 
 		
 		
@@ -132,6 +139,16 @@ public class Server {
 	public void setRatioPermUsed(long ratioPermUsed) {
 		this.ratioPermUsed = ratioPermUsed;
 	}
+
+	public long getRatioHeapUsed() {
+		return ratioHeapUsed;
+	}
+
+	public void setRatioHeapUsed(long ratioHeapUsed) {
+		this.ratioHeapUsed = ratioHeapUsed;
+	}
+	
+	
 	
 	
 

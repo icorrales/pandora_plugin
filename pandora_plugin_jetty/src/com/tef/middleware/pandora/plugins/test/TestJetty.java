@@ -45,6 +45,7 @@ public class TestJetty extends TestCase {
 		assertTrue(s.getCpuLoad() > 0);
 		assertTrue(s.getRatioOldUsed() == 0);
 		assertTrue(s.getRatioPermUsed() > 0);
+		assertTrue(s.getRatioHeapUsed() > 0);
 	}
 
 }
